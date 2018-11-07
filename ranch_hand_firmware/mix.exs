@@ -40,7 +40,8 @@ defmodule RanchHandFimware.MixProject do
     [
       {:nerves, "~> 1.3", runtime: false},
       {:shoehorn, "~> 0.4"},
-      {:ring_logger, "~> 0.4"}
+      {:ring_logger, "~> 0.4"},
+      {:ranch_hand, path: "../ranch_hand"}
     ] ++ deps(@target)
   end
 

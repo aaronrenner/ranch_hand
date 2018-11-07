@@ -1,0 +1,25 @@
+language: elixir
+elixir:
+  - 1.7.4
+otp_release:
+  - 21.1.1
+
+dist: trusty
+
+cache:
+  directories:
+    - ranch_hand/_build
+    - ranch_hand/deps
+
+before_script:
+  - cd ranch_hand && mix local.hex --force
+  - cd ranch_hand && mix deps.get --only test
+  - cd ranch_hand && mix deps.clean --unused
+  - cd ranch_hand && MIX_ENV mix compile --warnings-as-errors
+  - cd ranch_hand && MIX_ENV travis_wait mix dialyzer --plt
+
+script:
+  - cd ranch_hand && mix test
+  - cd ranch_hand && mix credo --strict
+  - cd ranch_hand && mix format --check-formatted
+  - cd ranch_hand && mix dialyzer --format short --halt-exit-status
