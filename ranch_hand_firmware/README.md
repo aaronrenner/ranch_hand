@@ -20,6 +20,7 @@ To start your Nerves app:
   * `export MIX_TARGET=my_target` or prefix every command with
     `MIX_TARGET=my_target`. For example, `MIX_TARGET=rpi3`
   * Install dependencies with `mix deps.get`
+  * Set secrets. `cp config/dev.secret.template.exs config/dev.secret.exs`
   * Create firmware with `mix firmware`
   * Burn to an SD card with `mix firmware.burn`
 

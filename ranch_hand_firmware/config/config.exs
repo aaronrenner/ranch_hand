@@ -40,16 +40,40 @@ config :nerves_firmware_ssh,
 # Configure nerves_init_gadget.
 # See https://hexdocs.pm/nerves_init_gadget/readme.html for more information.
 
-config :nerves_init_gadget,
-  ifname: "usb0",
-  address_method: :dhcpd,
-  mdns_domain: "nerves.local",
-  node_name: nil,
-  node_host: :mdns_domain,
-  ssh_console_port: 22
+config :nerves_network,
+  regulatory_domain: "US"
+
+
+case Mix.Project.config[:target] do
+  "rpi0" ->
+    # config :nerves_init_gadget,
+    #   ifname: "usb0",
+    #   address_method: :dhcpd,
+    #   mdns_domain: "nerves.local",
+    #   node_name: nil,
+    #   node_host: :mdns_domain,
+    #   ssh_console_port: 22
+
+    config :nerves_init_gadget,
+      ifname: "wlan0",
+      address_method: :dhcp,
+      mdns_domain: "nerves.local",
+      node_name: nil,
+      node_host: :mdns_domain,
+      ssh_console_port: 22
+
+  target ->
+    Mix.raise("No network config for target #{inspect(target)}")
+end
 
 # Import target specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 # Uncomment to use target specific configurations
 
 # import_config "#{Mix.Project.config[:target]}.exs"
+
+try do
+  import_config "#{Mix.env()}.secret.exs"
+rescue
+  Code.LoadError -> :ok
+end

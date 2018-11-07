@@ -55,6 +55,6 @@ defmodule RanchHandFimware.MixProject do
   end
 
   defp system("rpi3"), do: [{:nerves_system_rpi3, "~> 1.0", runtime: false}]
-  defp system("rpi0"), do: [{:nerves_system_rpi0, "~> 1.0", runtime: false}]
+  defp system("rpi0"), do: [{:ranch_hand_system_rpi, "~> 1.0", github: "aaronrenner/ranch_hand_system_rpi", runtime: false}]
   defp system(target), do: Mix.raise("Unknown MIX_TARGET: #{target}")
 end
