@@ -8,21 +8,36 @@ dist: trusty
 
 cache:
   directories:
+    - .mix
     - ranch_hand/_build
     - ranch_hand/deps
+    - ranch_hand_web/_build
+    - ranch_hand_web/deps
+
+before_install:
+  # This makes it so dialyzer uses the same base plts across projects
+  - mkdir -p .mix && export MIX_HOME="$TRAVIS_BUILD_DIR/.mix"
 
 install:
   - mix local.rebar --force
   - mix local.hex --force
 
 before_script:
-  - (cd ranch_hand && mix deps.get --only test)
+  - (cd ranch_hand && mix deps.get)
   - (cd ranch_hand && mix deps.clean --unused)
   - (cd ranch_hand && mix compile --warnings-as-errors)
   - (cd ranch_hand && travis_wait mix dialyzer --plt)
+  - (cd ranch_hand_web && mix deps.get)
+  - (cd ranch_hand_web && mix deps.clean --unused)
+  - (cd ranch_hand_web && mix compile --warnings-as-errors)
+  - (cd ranch_hand_web && travis_wait mix dialyzer --plt)
 
 script:
   - (cd ranch_hand && mix test)
   - (cd ranch_hand && mix credo --strict)
   - (cd ranch_hand && mix format --check-formatted)
   - (cd ranch_hand && mix dialyzer --format short --halt-exit-status)
+  - (cd ranch_hand_web && mix test)
+  - (cd ranch_hand_web && mix credo --strict)
+  - (cd ranch_hand_web && mix format --check-formatted)
+  - (cd ranch_hand_web && mix dialyzer --format short --halt-exit-status)
