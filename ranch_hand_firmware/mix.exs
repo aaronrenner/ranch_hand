@@ -38,10 +38,11 @@ defmodule RanchHandFimware.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:ranch_hand, path: "../ranch_hand"},
+      {:ranch_hand_web, path: "../ranch_hand_web"},
       {:nerves, "~> 1.3", runtime: false},
       {:shoehorn, "~> 0.4"},
-      {:ring_logger, "~> 0.4"},
-      {:ranch_hand, path: "../ranch_hand"}
+      {:ring_logger, "~> 0.4"}
     ] ++ deps(@target)
   end
 

@@ -16,6 +16,7 @@ use Mix.Config
 config :ranch_hand_web, RanchHandWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
   url: [host: "example.com", port: 80],
+  server: true,
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # ## SSL Support
@@ -69,4 +70,4 @@ config :ranch_hand_web, RanchHandWeb.Endpoint,
 
 # Finally import the config/prod.secret.exs which should be versioned
 # separately.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"
