@@ -1,3 +1,30 @@
 /* This file is for your main application css. */
 
-@import "./phoenix.css";
+@import "../node_modules/normalize.css/normalize.css";
+@import "../node_modules/milligram/dist/milligram.css";
+
+.navigation {
+  background-color: #f4f5f6;
+  border-bottom: .1rem solid #d1d1d1;
+}
+
+.navigation .title {
+  font-size: 1.6rem;
+  line-height: 5.2rem;
+  padding: 0;
+  display: inline;
+}
+
+.metric{
+  background-color: #f4f5f6;
+  text-align: center;
+}
+
+.metric .value{
+    font-size: 3.8rem;
+    font-weight: bold;
+}
+
+.metric .label{
+    font-weight: normal;
+}

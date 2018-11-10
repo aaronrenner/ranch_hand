@@ -39,8 +39,11 @@ defmodule RanchHandWeb.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
+      {:ranch_hand, path: "../ranch_hand"},
       {:credo, "~> 1.0.0-rc1", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0.0-rc.4", only: [:dev, :test], runtime: false}
+      {:dialyxir, "~> 1.0.0-rc.4", only: [:dev, :test], runtime: false},
+      {:mox, "~> 0.4", only: :test},
+      {:stream_data, "~> 0.1", only: :test}
     ]
   end
 end

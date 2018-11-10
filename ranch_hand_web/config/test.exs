@@ -11,3 +11,6 @@ config :ranch_hand_web, RanchHandWeb.Endpoint,
   server: false
 
 config :logger, :level, :warn
+
+# Put constantizer in dynamic mode
+config :constantizer, resolve_at_compile_time: false
